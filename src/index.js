@@ -3,13 +3,13 @@ const bodyParser = require('body-parser')
 
 const BAD_REQUEST = 400;
 const app = express();
-const port = 3000; //Hardcoded for the win
+const port = process.env.PORT;
 const users = [];
 
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-    res.send('Hello World! :D')
+    res.send(`Bem-vindo a ${process.env.APP_NAME}`)
 })
 
 // Registrar Usuário

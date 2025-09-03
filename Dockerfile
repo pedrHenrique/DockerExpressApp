@@ -1,5 +1,5 @@
 # Runtime Enviromment
-FROM node:22
+FROM node:22-alpine
 
 # Boa prática
 WORKDIR /app
@@ -7,14 +7,18 @@ WORKDIR /app
 # Copy Dependências
 COPY package*.json .
 
-# Copy Código Fonte
-COPY src .
-
 # Run Instalar as Dependências (NPM CI -> Clean Install)
 RUN npm ci
 
+# Copy Código Fonte
+COPY . .
+
+# Podemos definir as variáveis aqui também. (Elas podem ser sobrescritas no CLI tbm!)
+# ENV PORT=5000
+# ENV APP_NAME="Meu App Express"
+
 # Export Porta
-EXPOSE 3000
+EXPOSE $PORT
 
 # Run node start
-CMD [ "node", "index.js" ]
+CMD [ "npm", "start" ]
